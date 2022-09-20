@@ -9,11 +9,42 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
+  <body class='flex flex-col h-screen'>
+    <header class='flex justify-between border border-mid-nude'>
+      <img src="<%= image_path 'logo' %>" class='w-12 m-5  '> 
+      <button class='m-5 py-2.5 px-5 bg-dark-nude rounded-full'>Add Task</button>
+    </header>
+
+    <main class="grid grid-cols-9 h-full relative">
+      <nav class='flex flex-col h-full border border-mid-nude'>
+        <%= link_to '<span class="material-symbols-outlined text-dark-nude">dashboard</span>Dashboard'.html_safe, '../dashboard', class: 'p-3.5 flex border-b border-mid-nude ' %>
+        <%= link_to '<span class="material-symbols-outlined text-dark-nude">today</span>Today'.html_safe, '../dashboard', class: 'p-3.5 flex ' %>
+        <%= link_to 'Categories<span class="material-symbols-outlined text-slate-900">add</span>'.html_safe, '../categories/new', class: 'bg-dark-nude w-full p-3.5 flex' %>
+        <ul class='flex flex-col justify-center items-center w-full'>
+          <% @categories.each do |cat| %>
+            <li class='p-3.5 border-b border-mid-nude w-full'> <%= link_to cat.category_name, category_path(cat) %> </li>
+          <% end %>
+        </ul>
+      </nav>
+      <div class='col-span-8 p-12'>
+        <%= yield %>
+      </div>
+
+      <% if notice.present? %>
+        <div class='absolute bottom-0 right-0 bg-mid-nude rounded p-3.5 m-3.5 ' id="notice">
+            <p><%= notice %></p>
+        </div>
+      <% end %>
+
+      
+
     </main>
+
   </body>
 </html>

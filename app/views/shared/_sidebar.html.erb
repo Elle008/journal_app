@@ -1,0 +1,10 @@
+<nav class='flex flex-col h-85vh border border-mid-nude py-3.5'>
+  <%= link_to '<span class="material-symbols-outlined text-dark-nude">dashboard</span>Dashboard'.html_safe, '../dashboard', class: 'p-3.5 flex border-b border-mid-nude ' %>
+  <%= link_to '<span class="material-symbols-outlined text-dark-nude">today</span>Today'.html_safe, '../dashboard', class: 'p-3.5 flex ' %>
+  <%= link_to 'Categories<span class="material-symbols-outlined text-slate-900">add</span>'.html_safe, '../categories/new', class: 'bg-dark-nude w-full p-3.5 flex' %>
+  <ul class='flex flex-col justify-center items-center w-full'>
+    <% @categories.each do |cat| %>
+      <li class='p-3.5 border-b border-mid-nude w-full'> <%= link_to cat.category_name, category_path(cat) %> </li>
+    <% end %>
+  </ul>
+</nav>
